@@ -1,0 +1,56 @@
+---
+title: 'Homework #2'
+author: "Evan Mills; ejmills"
+date: "January 31, 2019"
+output: html_document
+---
+
+```{r}
+cel <- c(-9, -23)
+cel
+
+vec200 <- seq(0,200)
+vec200 <- vec200 %% 2
+vec200
+
+num <- seq(1,1001)
+num <- round(sqrt(num))
+num
+numPerfect <- length(unique(num))
+numPerfect
+
+```
+
+Below is the code to get the top 3 most fule-efficient cars in the dataset. After loading in the dataset I first sorted by the highway mpg and then extracted the top three rows.
+
+```{r}
+library(ggplot2)
+
+d <- mpg
+
+ordered <- d[order(d$hwy, decreasing = TRUE),]
+
+top3 <- ordered[0:3,]
+top3
+```
+
+Below is the code for counting how many different compact car modles there are in the data set and then stored in the variable numComp.
+
+```{r}
+library(plyr)
+comp <- count(d, "class")
+numComp <- comp[2,2]
+numComp
+```
+
+The graph below shows the relationship between city mpg and highway mpg. As you can see the relation ship it pretty liniar, therefore as the city mpg goes up so will the highway mpg. The graph only shows a few points since many overlap and make the same point on the chart.
+
+```{r}
+qplot(x = d$cty, y = d$hwy, data = d, xlab = "MPG City", ylab = "MPG Highway")
+```
+
+As you can see frome the graph below the mpg of cars has not really changed since 1999. 
+
+```{r}
+qplot(x = d$year, y = d$hwy, data = d)
+```
